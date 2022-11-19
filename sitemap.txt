@@ -1,6 +1,0 @@
-https://xxdboom.github.io/2022/11/14/221114cloud/
-https://xxdboom.github.io/2022/11/02/221102java/
-https://xxdboom.github.io/2022/09/20/hello-world/
-https://xxdboom.github.io/
-https://xxdboom.github.io/tags/java/
-https://xxdboom.github.io/tags/openfeign/
