@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>通过Feign调用外网HTTP，设置请求头，熔断器</title>
+      <link href="/2022/11/14/221114cloud/"/>
+      <url>/2022/11/14/221114cloud/</url>
+      
+        <content type="html"><![CDATA[<p>在许多项目中，往往需要和其他厂商的项目进行对接。这就不得不访问外部url接口。网上的各种方案层出不穷，但我不太喜欢额外添加maven依赖，所以使用已有的feign实现。</p><p>由于个人习惯，我的spring-boot版本是2.6.7。这导致了我添加openfeign依赖时总是报错，因为网络上的教程往往是使用了Hoxton.SR8版本的spring-cloud，它的绑定依赖openfeign是2.2.5.RELEASE。</p><p>版本兼容的问题往往最难为新手。</p><ol><li><p>添加Maven依赖</p><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-loadbalancer<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li><li><p>在启动类添加注解</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients</span></span><br></pre></td></tr></table></figure></li><li><p>在配置文件中打开熔断器</p><figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">feign.circuitbreaker.enabled</span>=<span class="string">true</span></span><br></pre></td></tr></table></figure></li><li><p>编写Feign接口</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@FeignClient(url = &quot;http://aliyun.test.com&quot;, name = &quot;test&quot;, fallback = OutFeignImpl.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">OutFeign</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(value = &quot;/test&quot;, headers = &#123;&quot;session_id=1001&quot;&#125;,produces = &#123;&quot;application/json&quot;&#125;)</span></span><br><span class="line">    Object <span class="title function_">getInfo</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol><li><p>在@FeignClient中，url指定外部http请求，name或value为注解必写参数，fallback则是熔断器指定实现类。</p></li><li><p>@GetMapping中，headers可以设置请求头，因不同于大部分博客上的版本，所以headers中的参数用等于号相连。</p></li></ol></li><li><p>编写熔断器实现类</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OutFeignImpl</span> <span class="keyword">implements</span> <span class="title class_">OutFeign</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">getInfo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;---触发熔断---&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol><p>至此，便可以在项目中调用外部url了。</p><p>参考：<a href="https://www.jb51.net/article/215784.htm">使用feign服务调用添加Header参数_java_脚本之家 (jb51.net)</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> openfeign </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Copy &#39;xxx&#39; to effectively final temp variable 问题解决</title>
+      <link href="/2022/11/02/221102java/"/>
+      <url>/2022/11/02/221102java/</url>
+      
+        <content type="html"><![CDATA[<p>今天在项目中修改接口的时候突然发现了类型问题，便用if函数对变量进行了类型的校验。</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (params.get(<span class="string">&quot;a&quot;</span>) <span class="keyword">instanceof</span> Integer) &#123;</span><br><span class="line">   a = (<span class="type">int</span>) params.get(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">   a = Integer.parseInt(params.get(<span class="string">&quot;a&quot;</span>).toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>没有多想，便进行了提交，编译后发现竟然报错了。筛查后发现，在这块代码下有一处匿名内部类调用了该变量。</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">finalA</span> <span class="operator">=</span> a;</span><br><span class="line"><span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;thread a = &quot;</span> + finalA);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>出错的原因是：内部类对象的生命周期会超过局部变量的生命周期。</p><p>所以在匿名内部类中，只能调用被final修饰的局部变量，而在java 8中，如果局部变量被匿名内部类访问，那么该变量会自动被final隐性修饰。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2022/09/20/hello-world/"/>
+      <url>/2022/09/20/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
