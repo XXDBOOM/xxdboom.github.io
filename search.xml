@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>maxDepth</title>
+      <link href="/2025/12/25/maxDepth/"/>
+      <url>/2025/12/25/maxDepth/</url>
+      
+        <content type="html"><![CDATA[<p>给定一个二叉树 root ，返回其最大深度。</p><p>二叉树的 最大深度 是指从根节点到最远叶子节点的最长路径上的节点数。</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 计算二叉树的最大深度</span></span><br><span class="line"><span class="comment">     * 最大深度是从根节点到最远叶子节点的最长路径上的节点数</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> root 二叉树的根节点</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 二叉树的最大深度</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxDepth</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 递归计算左子树和右子树的最大深度</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">leftHeight</span> <span class="operator">=</span> maxDepth(root.left);</span><br><span class="line">            <span class="type">int</span> <span class="variable">rightHeight</span> <span class="operator">=</span> maxDepth(root.right);</span><br><span class="line">            <span class="comment">// 返回左右子树中较大的深度值加1（当前节点）</span></span><br><span class="line">            <span class="keyword">return</span> Math.max(leftHeight, rightHeight) + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>😂</p><p><img src="/../img/bored.jpg"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>20230203_lost requst in asyn</title>
+      <link href="/2023/02/03/20230203-lost-requst-in-asyn/"/>
+      <url>/2023/02/03/20230203-lost-requst-in-asyn/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>springboot项目集成swagger的实现</title>
+      <link href="/2022/11/21/221121spring/"/>
+      <url>/2022/11/21/221121spring/</url>
+      
+        <content type="html"><![CDATA[<p>这几日在项目中，老是看到看到许多swagger注解，许多只能了解各大概，抱着得过且过的态度用用就行了。直到自己在构建项目时，发现单纯的添加依赖会报空指针错误。</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Failed to start bean &#x27;documentationPluginsBootstrapper&#x27;; nested exception is java.lang.NullPointerException</span><br></pre></td></tr></table></figure><p>一番百度后发现，Springfox假设MVC的路径匹配政策是<code>ant-path-matcher</code>,而 Spring Boot 2.6.x版本的默认匹配策略是 <code>path-pattern-matcher</code>，这就造成了上面的报错。</p><h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure><h2 id="配置注解"><a href="#配置注解" class="headerlink" title="配置注解"></a>配置注解</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SwaggerConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Docket <span class="title function_">docket</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="type">ApiInfo</span> <span class="variable">apiInfo</span> <span class="operator">=</span></span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">ApiInfoBuilder</span>()</span><br><span class="line">                        .title(<span class="string">&quot;5101Club日常管理系统API——Gateway&quot;</span>)</span><br><span class="line">                        .description(<span class="string">&quot;管理系统采用SpringBoot开发，API文档集成Swagger&quot;</span>)</span><br><span class="line">                        .version(<span class="string">&quot;1.0&quot;</span>)</span><br><span class="line">                        .contact(<span class="keyword">new</span> <span class="title class_">Contact</span>(<span class="string">&quot;slipperySoap&quot;</span>, <span class="string">&quot;https://github.com/XXDBOOM&quot;</span>, <span class="string">&quot;xxdboom@outlook.com&quot;</span>))</span><br><span class="line">                        .license(<span class="string">&quot;Apache 2.0&quot;</span>)</span><br><span class="line">                        .licenseUrl(<span class="string">&quot;http://www.apache.org/licenses/LICENSE-2.0&quot;</span>)</span><br><span class="line">                        .build();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Docket</span>(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(apiInfo)</span><br><span class="line">                .select()</span><br><span class="line">                <span class="comment">// 配置swagger显示的controller，如果不配置则默认扫描所有后端接口</span></span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.xxd.testdemo.controller&quot;</span>))</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">mvc:</span></span><br><span class="line">    <span class="attr">pathmatch:</span></span><br><span class="line">      <span class="attr">matching-strategy:</span> <span class="string">ant_path_matcher</span></span><br></pre></td></tr></table></figure><h2 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h2><div><p><img src="https://gitee.com/xxdboom/images/raw/master/blog/20221121200603.png" alt="result"></p></div>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> spring </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>通过Feign调用外网HTTP，设置请求头，熔断器</title>
+      <link href="/2022/11/14/221114cloud/"/>
+      <url>/2022/11/14/221114cloud/</url>
+      
+        <content type="html"><![CDATA[<p>在许多项目中，往往需要和其他厂商的项目进行对接。这就不得不访问外部url接口。网上的各种方案层出不穷，但我不太喜欢额外添加maven依赖，所以使用已有的feign实现。</p><p>由于个人习惯，我的spring-boot版本是2.6.7。这导致了我添加openfeign依赖时总是报错，因为网络上的教程往往是使用了Hoxton.SR8版本的spring-cloud，它的绑定依赖openfeign是2.2.5.RELEASE。</p><p>版本兼容的问题往往最难为新手。</p><ol><li><p>添加Maven依赖</p><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-loadbalancer<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>3.1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.9.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></li><li><p>在启动类添加注解</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients</span></span><br></pre></td></tr></table></figure></li><li><p>在配置文件中打开熔断器</p><figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">feign.circuitbreaker.enabled</span>=<span class="string">true</span></span><br></pre></td></tr></table></figure></li><li><p>编写Feign接口</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@FeignClient(url = &quot;http://aliyun.test.com&quot;, name = &quot;test&quot;, fallback = OutFeignImpl.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">OutFeign</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(value = &quot;/test&quot;, headers = &#123;&quot;session_id=1001&quot;&#125;,produces = &#123;&quot;application/json&quot;&#125;)</span></span><br><span class="line">    Object <span class="title function_">getInfo</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol><li><p>在@FeignClient中，url指定外部http请求，name或value为注解必写参数，fallback则是熔断器指定实现类。</p></li><li><p>@GetMapping中，headers可以设置请求头，因不同于大部分博客上的版本，所以headers中的参数用等于号相连。</p></li></ol></li><li><p>编写熔断器实现类</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OutFeignImpl</span> <span class="keyword">implements</span> <span class="title class_">OutFeign</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">getInfo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;---触发熔断---&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol><p>至此，便可以在项目中调用外部url了。</p><p>参考：<a href="https://www.jb51.net/article/215784.htm">使用feign服务调用添加Header参数_java_脚本之家 (jb51.net)</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> openfeign </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Copy &#39;xxx&#39; to effectively final temp variable 问题解决</title>
+      <link href="/2022/11/02/221102java/"/>
+      <url>/2022/11/02/221102java/</url>
+      
+        <content type="html"><![CDATA[<p>今天在项目中修改接口的时候突然发现了类型问题，便用if函数对变量进行了类型的校验。</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (params.get(<span class="string">&quot;a&quot;</span>) <span class="keyword">instanceof</span> Integer) &#123;</span><br><span class="line">   a = (<span class="type">int</span>) params.get(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">   a = Integer.parseInt(params.get(<span class="string">&quot;a&quot;</span>).toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>没有多想，便进行了提交，编译后发现竟然报错了。筛查后发现，在这块代码下有一处匿名内部类调用了该变量。</p><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">finalA</span> <span class="operator">=</span> a;</span><br><span class="line"><span class="type">Thread</span> <span class="variable">thread</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Thread</span>(<span class="keyword">new</span> <span class="title class_">Runnable</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;thread a = &quot;</span> + finalA);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p>出错的原因是：内部类对象的生命周期会超过局部变量的生命周期。</p><p>所以在匿名内部类中，只能调用被final修饰的局部变量，而在java 8中，如果局部变量被匿名内部类访问，那么该变量会自动被final隐性修饰。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> java </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
