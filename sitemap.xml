@@ -4,7 +4,7 @@
   <url>
     <loc>https://xxdboom.github.io/2026/01/14/%E5%AE%8C%E6%95%B4Docker%E9%83%A8%E7%BD%B2%E5%85%A8%E6%B5%81%E7%A8%8B%E6%95%99%E7%A8%8B%EF%BC%88Windows%E6%9C%AC%E5%9C%B0%20%E2%86%92%20Ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%89/</loc>
     
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -13,7 +13,25 @@
   <url>
     <loc>https://xxdboom.github.io/2026/01/13/docker%20compose%20%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E6%B5%81%E7%A8%8B/</loc>
     
-    <lastmod>2026-01-13</lastmod>
+    <lastmod>2026-02-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xxdboom.github.io/2026/02/04/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AD%97%E6%AE%B5%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83%E5%8F%8A%E6%A0%B8%E5%BF%83%E5%8E%9F%E5%9B%A0/</loc>
+    
+    <lastmod>2026-02-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://xxdboom.github.io/2026/02/04/Spring-%E7%9A%84%E4%BA%8B%E5%8A%A1%E7%AE%A1%E7%90%86%E6%9C%BA%E5%88%B6%E8%BE%93%E5%87%BA%E7%9A%84%E8%AD%A6%E5%91%8A%E6%97%A5%E5%BF%97/</loc>
+    
+    <lastmod>2026-02-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -56,7 +74,7 @@
   </url>
   
   <url>
-    <loc>https://xxdboom.github.io/2022/11/14/221114cloud/</loc>
+    <loc>https://xxdboom.github.io/2022/11/02/221102java/</loc>
     
     <lastmod>2025-12-25</lastmod>
     
@@ -65,7 +83,7 @@
   </url>
   
   <url>
-    <loc>https://xxdboom.github.io/2022/11/02/221102java/</loc>
+    <loc>https://xxdboom.github.io/2022/11/14/221114cloud/</loc>
     
     <lastmod>2025-12-25</lastmod>
     
@@ -85,36 +103,36 @@
 
   <url>
     <loc>https://xxdboom.github.io/</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://xxdboom.github.io/tags/openfeign/</loc>
-    <lastmod>2026-01-30</lastmod>
+    <loc>https://xxdboom.github.io/tags/java/</loc>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://xxdboom.github.io/tags/java/</loc>
-    <lastmod>2026-01-30</lastmod>
+    <loc>https://xxdboom.github.io/tags/openfeign/</loc>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xxdboom.github.io/tags/spring/</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xxdboom.github.io/tags/docker/</loc>
-    <lastmod>2026-01-30</lastmod>
+    <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
