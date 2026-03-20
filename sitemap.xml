@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xxdboom.github.io/2026/03/20/%E5%BC%82%E6%AD%A5%E6%89%B9%E9%87%8F%E5%AF%BC%E5%85%A5%E4%B8%AD%E8%AF%B7%E6%B1%82%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BC%A0%E9%80%92/</loc>
+    
+    <lastmod>2026-03-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://xxdboom.github.io/2026/03/13/docker%E5%AE%89%E8%A3%85%E8%BD%BB%E9%87%8F%E7%9A%84%E5%90%91%E9%87%8F%E6%A8%A1%E5%9E%8B/</loc>
     
     <lastmod>2026-03-13</lastmod>
@@ -139,7 +148,7 @@
 
   <url>
     <loc>https://xxdboom.github.io/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -147,63 +156,63 @@
   
   <url>
     <loc>https://xxdboom.github.io/tags/spring/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xxdboom.github.io/tags/java/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xxdboom.github.io/tags/openfeign/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xxdboom.github.io/tags/docker/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xxdboom.github.io/tags/algorithm/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xxdboom.github.io/tags/go/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xxdboom.github.io/tags/redis/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xxdboom.github.io/tags/db/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://xxdboom.github.io/tags/ai/</loc>
-    <lastmod>2026-03-13</lastmod>
+    <lastmod>2026-03-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
